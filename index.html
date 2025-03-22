@@ -5,16 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="Free Image Hosting - Upload your images for free and share them with your friends.">
+    <meta name="keywords" content="free, image, hosting, upload, share, images">
+    <meta name="author" content="František Špaček, Lukáš Podolský">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Image Hosting</title>
+
+    <title>Free Image Hosting</title>
+
 </head>
 
 <body>
 
     <div class="container">
+        <h1><span class="underline">Free</span> Image Hosting</h1>
+        <p>Upload your images for free and share them with your friends.</p>
 
-        <h1>Image Hosting</h1>
+        <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="file" class="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Drag & Drop or Click to Select a File</span>
+            </label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit" name="submit">Upload</button>
 
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </form>
     </div>
 
 </body>

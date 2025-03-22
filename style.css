@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap');
 
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -13,4 +13,102 @@ body {
     height: 100vh;
     font-family: 'Inter', sans-serif;
     background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: 2.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.underline {
+    position: relative;
+    display: inline-block;
+}
+
+.underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background-image: url('https://www.beyondcss.dev/underline.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: -10px;
+    left: 0;
+}
+
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #fafafa;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-area:hover,
+.upload-area.dragging {
+    background-color: #fef1f6;
+    border-color: #ff4b7d;
+}
+
+.upload-area i {
+    font-size: 50px;
+    color: #ff4b7d;
+    margin-bottom: 15px;
+}
+
+.upload-area span {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
 }
