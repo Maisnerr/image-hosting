@@ -8,7 +8,8 @@
 
     <meta name="google-site-verification" content="9IsjH-8M8DB-H2RI3qPJZYATcEXEJfS8mGwwoRhUBFA" />
 
-    <meta name="description" content="Free Image Hosting - Upload your images for free and share them with your friends.">
+    <meta name="description"
+        content="Free Image Hosting - Upload your images for free and share them with your friends.">
     <meta name="keywords" content="free, image, hosting, upload, share, images">
     <meta name="author" content="František Špaček, Lukáš Podolský">
 
@@ -22,7 +23,10 @@
 
 <body>
 
+    <button id="toggleDark" class="dark-mode-btn"><i class="fas fa-moon"></i> Dark Mode</button>
+
     <div class="container">
+
         <h1><span class="underline">Free</span> Image Hosting</h1>
         <p>Upload your images for free and share them with your friends.</p>
 
@@ -33,12 +37,31 @@
             </label>
             <input type="file" name="file" id="file" required>
             <button type="submit" name="submit">Upload</button>
-
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
         </form>
     </div>
+
+    <script>
+        const darkBtn = document.getElementById('toggleDark');
+
+        // Tohle je kód, který checkne v LocalStorage, jestli je tam uložený darkMode (Kdyby si nevěděl Lukáši)
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark');
+            darkBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+        }
+
+        darkBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+                darkBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+                darkBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
+            }
+        });
+    </script>
+
 
 </body>
 
