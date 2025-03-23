@@ -112,3 +112,66 @@ button {
 button:hover {
     background-color: #555;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .upload-area {
+        padding: 20px;
+    }
+
+    .upload-area i {
+        font-size: 40px;
+    }
+
+    .upload-area span {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .upload-area {
+        padding: 15px;
+    }
+
+    .upload-area i {
+        font-size: 30px;
+    }
+
+    .upload-area span {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
+}
