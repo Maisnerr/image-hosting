@@ -15,7 +15,7 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <title>Free Image Hosting</title>
 
@@ -30,36 +30,18 @@
         <h1><span class="underline">Free</span> Image Hosting</h1>
         <p>Upload your images for free and share them with your friends.</p>
 
-        <form id="uploadForm" action="upload.php" method="post" enctype="multipart/form-data">
+        <form id="uploadForm">
             <label for="file" class="upload-area">
                 <i class="fas fa-cloud-upload-alt"></i>
                 <span>Drag & Drop or Click to Select a File</span>
             </label>
             <input type="file" name="file" id="file" required>
-            <button type="submit" name="submit">Upload</button>
+            <button type="submit" name="submit" onclick="uploadImage()">Upload</button>
         </form>
     </div>
 
-    <script>
-        const darkBtn = document.getElementById('toggleDark');
-
-        // Tohle je kód, který checkne v LocalStorage, jestli je tam uložený darkMode (Kdyby si nevěděl Lukáši)
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            document.body.classList.add('dark');
-            darkBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-        }
-
-        darkBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-
-            if (document.body.classList.contains('dark')) {
-                localStorage.setItem('darkMode', 'enabled');
-                darkBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                darkBtn.innerHTML = '<i class="fas fa-moon"></i> Dark Mode';
-            }
-        });
+    <script src="{{ url_for('static', filename='script.js') }}">
+        // presunul jsem to do /static/ kvuli prehlednosti, pokud to tak nechces tak to klidne jebni tu ale za me je lepsi kdyz je to vedle
     </script>
 
 
