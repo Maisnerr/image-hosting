@@ -1,4 +1,6 @@
 const currentIP = "http://192.168.1.138:5000" //localni adresa pro debug, az se pujde na production bude to url te stranky
+const form = document.getElementById("uploadForm")
+
 const darkBtn = document.getElementById('toggleDark');
 
         // Tohle je kód, který checkne v LocalStorage, jestli je tam uložený darkMode (Kdyby si nevěděl Lukáši)
@@ -19,7 +21,9 @@ const darkBtn = document.getElementById('toggleDark');
             }
         });
 
-function uploadImage() {
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     const input = document.getElementById('file');
     const file = input.files[0];
 
@@ -38,24 +42,25 @@ function uploadImage() {
 
     const formData = new FormData();
     formData.append('image', file);
-    formData.append("zkouska", "siren")
 
-    fetch(currentIP+'/upload_image', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+    try {
+        const response = await fetch(currentIP+'/upload_image', {
+            method: 'POST',
+            body: formData 
+        });
 
-        if (data.file_url) {
-            
+        // Check if the response is OK (status 200-299)
+        if (response.ok) {
+            const data = await response.json();
+            if (data.image_url) {
+                console.log("laces");
+            }
         } else {
-            console.error('No file URL received.');
+            const errorData = await response.json();
+            alert(`Error: ${errorData.error || "Something went wrong!"}`);
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error uploading image.');
-    });
-}
+    } catch (error) {
+        console.error('Error during request:', error);
+        alert('Something went wrong with the request!');
+    }
+});
