@@ -8,24 +8,13 @@
 
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     background-color: #f0f0f0;
     padding: 20px;
     transition: background-color 0.4s, color 0.4s;
-}
-
-.container {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-    position: relative;
 }
 
 h1 {
@@ -43,17 +32,37 @@ p {
     margin-bottom: 30px;
 }
 
-.underline {
+.header-actions {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 999;
+}
+
+.main-content {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 650px;
+    margin-top: 80px;
+}
+
+.highlight-underline {
     position: relative;
     display: inline-block;
 }
 
-.underline::after {
+.highlight-underline::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 20px;
-    background-image: url('https://www.beyondcss.dev/underline.svg');
+    background-image: url('/images/underline.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -61,7 +70,7 @@ p {
     left: 0;
 }
 
-.upload-area {
+.drop-zone {
     border: 2px dashed #ccc;
     border-radius: 10px;
     padding: 30px;
@@ -73,19 +82,19 @@ p {
     align-items: center;
 }
 
-.upload-area:hover,
-.upload-area.dragging {
+.drop-zone:hover,
+.drop-zone.dragging {
     background-color: #fef1f6;
     border-color: #ff4b7d;
 }
 
-.upload-area i {
+.drop-zone i {
     font-size: 50px;
     color: #ff4b7d;
     margin-bottom: 15px;
 }
 
-.upload-area span {
+.drop-zone span {
     font-size: 1.1rem;
     font-weight: 500;
     color: #333;
@@ -106,7 +115,6 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    margin-top: 20px;
     transition: background-color 0.3s ease;
 }
 
@@ -114,12 +122,16 @@ button:hover {
     background-color: #555;
 }
 
+button[type="submit"] {
+    margin-top: 20px;
+}
+
 body.dark {
     background-color: #121212;
     color: #ddd;
 }
 
-body.dark .container {
+body.dark .main-content {
     background-color: #1e1e1e;
     color: #ddd;
 }
@@ -128,25 +140,22 @@ body.dark h1 {
     color: #fff;
 }
 
-body.dark .upload-area {
+body.dark .drop-zone {
     background-color: #2c2c2c;
     border-color: #555;
 }
 
-body.dark .upload-area span {
+body.dark .drop-zone span {
     color: #ddd;
 }
 
-body.dark .upload-area:hover {
+body.dark .drop-zone:hover {
     background-color: #3a3a3a;
     border-color: #ff4b7d;
 }
 
-.dark-mode-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    margin: 0;
+.dark-mode-button,
+.login-button {
     background-color: #333;
     color: #fff;
     border: none;
@@ -154,72 +163,97 @@ body.dark .upload-area:hover {
     cursor: pointer;
     border-radius: 5px;
     font-weight: 600;
-    z-index: 999;
     transition: background-color 0.3s ease;
 }
 
-.dark-mode-btn:hover {
+.dark-mode-button:hover,
+.login-button:hover {
     background-color: #555;
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 30px;
-    }
-
-    h1 {
-        font-size: 2.3rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    .upload-area {
-        padding: 20px;
-    }
-
-    .upload-area i {
-        font-size: 40px;
-    }
-
-    .upload-area span {
-        font-size: 1rem;
-    }
-
-    button {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 20px;
-    }
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    margin: 100px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
 
-    h1 {
-        font-size: 2rem;
-    }
+.popup-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
 
-    p {
-        font-size: 0.9rem;
-    }
+.popup-content p {
+    margin: 0;
+    text-align: center;
+}
 
-    .upload-area {
-        padding: 15px;
-    }
+.popup-content button {
+    margin: 20px 0 10px;
+}
 
-    .upload-area i {
-        font-size: 30px;
-    }
+.popup-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
 
-    .upload-area span {
-        font-size: 0.9rem;
-    }
+.popup-content button {
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 5px;
+}
 
-    button {
-        padding: 10px 20px;
-        font-size: 0.85rem;
-    }
+.popup-content button:hover {
+    background-color: #555;
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+}
+
+body.dark .popup-content {
+    background-color: #1e1e1e;
+    color: #ddd;
+}
+
+body.dark .popup-content input {
+    background-color: #2c2c2c;
+    color: #ddd;
+    border-color: #555;
+}
+
+body.dark .popup-content button {
+    background-color: #555;
+}
+
+body.dark .popup-content button:hover {
+    background-color: #777;
 }
